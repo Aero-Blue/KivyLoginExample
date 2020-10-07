@@ -1,0 +1,69 @@
+<LoginForm>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: [50, 50, 50, 50]
+        spacing: 10
+        Label:
+            text: 'Login Page'
+            font_size: 28
+        Label:
+            text: 'Username'
+            font_size: 18
+            text_size: self.size
+            halign: 'left'
+        TextInput:
+            id: usernameField
+            multiline: False
+            write_tab: False
+            font_size: 18
+        Label:
+            text: 'Password'
+            font_size: 18
+            text_size: self.size
+            halign: 'left'
+        TextInput:
+            id: passwordField
+            password: True
+            multiline: False
+            write_tab: False
+            font_size: 18
+        BoxLayout:
+            Label:
+                text: 'Remember Me'
+                font_size: 18
+                text_size: self.size
+                halign: 'left'
+                valign: 'middle'
+
+            CheckBox:
+                id: rememberMe
+                size_hint: None, 1
+        Button:
+            id: submit
+            text: 'Submit'
+            font_size: 18
+            on_press: root.submit(usernameField.text, passwordField.text, rememberMe.active)
+
+<LoginErrorPopup>
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: root.msg
+        Button:
+            text: 'Close'
+            pos_hint: {'center_x': .5}
+            size_hint: (.5, .3)
+            on_press: root.dismiss()
+
+<SuccessScreen>
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: .16, .6, .56, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        Label:
+            text: 'Successfully logged in!'
+            font_size: 20
